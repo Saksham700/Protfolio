@@ -749,85 +749,88 @@ def about_section():
             """, unsafe_allow_html=True)
 
             st.markdown("""
-            <div style="margin-top: 30px; animation: fadeIn 1s ease-out forwards;">
-                <h3>Why Work With Me</h3>
-                <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">
-                    <div style="flex: 1; min-width: 200px; background-color: #f8f9fa; padding: 15px; border-radius: 10px; border-left: 4px solid #0066cc;">
-                        <h4 style="color: #0066cc; margin-bottom: 10px;">Problem Solver</h4>
-                        <p>I approach challenges with analytical thinking and creative solutions, always keeping the end goal in mind.</p>
-                    </div>
-                    <div style="flex: 1; min-width: 200px; background-color: #f8f9fa; padding: 15px; border-radius: 10px; border-left: 4px solid #0066cc;">
-                        <h4 style="color: #0066cc; margin-bottom: 10px;">Continuous Learner</h4>
-                        <p>I stay updated with the latest advancements in AI and data science to bring cutting-edge solutions.</p>
-                    </div>
-                    <div style="flex: 1; min-width: 200px; background-color: #f8f9fa; padding: 15px; border-radius: 10px; border-left: 4px solid #0066cc;">
-                        <h4 style="color: #0066cc; margin-bottom: 10px;">Team Player</h4>
-                        <p>I excel at collaborating with cross-functional teams to deliver integrated solutions that meet business objectives.</p>
+                <div style="margin-top: 30px; animation: fadeIn 1s ease-out forwards;">
+                    <h3>Why Work With Me</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">
+                        <div style="flex: 1; min-width: 200px; padding: 15px; border-radius: 10px; border-left: 4px solid #0066cc;">
+                            <h4 style="color: #0066cc; margin-bottom: 10px;">Problem Solver</h4>
+                            <p>I approach challenges with analytical thinking and creative solutions, always keeping the end goal in mind.</p>
+                        </div>
+                        <div style="flex: 1; min-width: 200px; padding: 15px; border-radius: 10px; border-left: 4px solid #0066cc;">
+                            <h4 style="color: #0066cc; margin-bottom: 10px;">Continuous Learner</h4>
+                            <p>I stay updated with the latest advancements in AI and data science to bring cutting-edge solutions.</p>
+                        </div>
+                        <div style="flex: 1; min-width: 200px; padding: 15px; border-radius: 10px; border-left: 4px solid #0066cc;">
+                            <h4 style="color: #0066cc; margin-bottom: 10px;">Team Player</h4>
+                            <p>I excel at collaborating with cross-functional teams to deliver integrated solutions that meet business objectives.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            """, unsafe_allow_html=True)      
-        with col2:
-            st.markdown("""
-            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-                <h3 style="margin-bottom: 15px;">Areas of Expertise</h3>
-                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                    <span class="tech-badge">Computer Vision</span>
-                    <span class="tech-badge">Deep Learning</span>
-                    <span class="tech-badge">NLP</span>
-                    <span class="tech-badge">LLMs</span>
-                    <span class="tech-badge">Data Analysis</span>
-                    <span class="tech-badge">Machine Learning</span>
-                    <span class="tech-badge">Time Series</span>
-                    <span class="tech-badge">AI Systems</span>
-                    <span class="tech-badge">Data Visualization</span>
-                    <span class="tech-badge">API Development</span>
-                    <span class="tech-badge">MLOps</span>
-                    <span class="tech-badge">Research</span>
+                """, unsafe_allow_html=True)
+
+            with col2:
+                st.markdown("""
+                <div style="padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #333;">
+                    <h3 style="margin-bottom: 15px;">Areas of Expertise</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                        <span class="tech-badge">Computer Vision</span>
+                        <span class="tech-badge">Deep Learning</span>
+                        <span class="tech-badge">NLP</span>
+                        <span class="tech-badge">LLMs</span>
+                        <span class="tech-badge">Data Analysis</span>
+                        <span class="tech-badge">Machine Learning</span>
+                        <span class="tech-badge">Time Series</span>
+                        <span class="tech-badge">AI Systems</span>
+                        <span class="tech-badge">Data Visualization</span>
+                        <span class="tech-badge">API Development</span>
+                        <span class="tech-badge">MLOps</span>
+                        <span class="tech-badge">Research</span>
+                    </div>
                 </div>
-            </div>
-            """, unsafe_allow_html=True)
-            st.markdown("""
-            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px;">
-                <h3 style="margin-bottom: 15px;">Professional Interests</h3>
-                <ul style="list-style-type: none; padding-left: 0;">
-                    <li style="display: flex; align-items: center; margin-bottom: 15px;">
-                        <div style="width: 30px; height: 30px; background-color: #0066cc; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
-                            <span style="color: white;">🤖</span>
-                        </div>
-                        <span>Generative AI & LLM Applications</span>
-                    </li>
-                    <li style="display: flex; align-items: center; margin-bottom: 15px;">
-                        <div style="width: 30px; height: 30px; background-color: #0066cc; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
-                            <span style="color: white;">👁️</span>
-                        </div>
-                        <span>Advanced Computer Vision Systems</span>
-                    </li>
-                    <li style="display: flex; align-items: center; margin-bottom: 15px;">
-                        <div style="width: 30px; height: 30px; background-color: #0066cc; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
-                            <span style="color: white;">🧠</span>
-                        </div>
-                        <span>Reinforcement Learning</span>
-                    </li>
-                    <li style="display: flex; align-items: center;">
-                        <div style="width: 30px; height: 30px; background-color: #0066cc; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
-                            <span style="color: white;">⚙️</span>
-                        </div>
-                        <span>AI for Process Automation</span>
-                    </li>
-                </ul>
-            </div>
-            """, unsafe_allow_html=True)
-            st.markdown("""
-            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 20px;">
-                <h3 style="margin-bottom: 15px;">Current Focus</h3>
-                <p>My current research and development focus is on:</p>
-                <div style="position: relative; height: 10px; background-color: #e0e0e0; border-radius: 5px; margin: 15px 0; overflow: hidden;">
-                    <div style="position: absolute; height: 100%; width: 85%; background: linear-gradient(to right, #0066cc, #00cccc); border-radius: 5px;"></div>
+                """, unsafe_allow_html=True)
+                
+                st.markdown("""
+                <div style="padding: 20px; border-radius: 10px; border: 1px solid #333;">
+                    <h3 style="margin-bottom: 15px;">Professional Interests</h3>
+                    <ul style="list-style-type: none; padding-left: 0;">
+                        <li style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <div style="width: 30px; height: 30px; background-color: #0066cc; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+                                <span style="color: white;">🤖</span>
+                            </div>
+                            <span>Generative AI & LLM Applications</span>
+                        </li>
+                        <li style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <div style="width: 30px; height: 30px; background-color: #0066cc; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+                                <span style="color: white;">👁️</span>
+                            </div>
+                            <span>Advanced Computer Vision Systems</span>
+                        </li>
+                        <li style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <div style="width: 30px; height: 30px; background-color: #0066cc; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+                                <span style="color: white;">🧠</span>
+                            </div>
+                            <span>Reinforcement Learning</span>
+                        </li>
+                        <li style="display: flex; align-items: center;">
+                            <div style="width: 30px; height: 30px; background-color: #0066cc; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+                                <span style="color: white;">⚙️</span>
+                            </div>
+                            <span>AI for Process Automation</span>
+                        </li>
+                    </ul>
                 </div>
-                <p style="font-weight: 500; color: #0066cc;">Building AI Agents for Agricultural Optimization</p>
-            </div>
-            """, unsafe_allow_html=True)
+                """, unsafe_allow_html=True)
+                
+                st.markdown("""
+                <div style="padding: 20px; border-radius: 10px; margin-top: 20px; border: 1px solid #333;">
+                    <h3 style="margin-bottom: 15px;">Current Focus</h3>
+                    <p>My current research and development focus is on:</p>
+                    <div style="position: relative; height: 10px; background-color: #333; border-radius: 5px; margin: 15px 0; overflow: hidden;">
+                        <div style="position: absolute; height: 100%; width: 85%; background: linear-gradient(to right, #0066cc, #00cccc); border-radius: 5px;"></div>
+                    </div>
+                    <p style="font-weight: 500; color: #0066cc;">Building AI Agents for Agricultural Optimization</p>
+                </div>
+                """, unsafe_allow_html=True)
     with tabs[1]:
         st.markdown("<h3>Technical Proficiency</h3>", unsafe_allow_html=True)
         skills = {
