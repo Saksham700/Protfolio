@@ -10,6 +10,7 @@ import json
 import time
 from datetime import datetime
 import numpy as np
+import altair as alt
 
 st.set_page_config(
     page_title="Saksham Raj | Portfolio",
@@ -21,6 +22,7 @@ st.set_page_config(
 def local_css():
     st.markdown("""
     <style>
+    /* Base variables */
     :root {
         --primary-color: #0066cc;
         --secondary-color: #4d94ff;
@@ -29,20 +31,75 @@ def local_css():
         --light-bg: #f8f9fa;
         --card-bg: #ffffff;
         --gradient-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        --dark-text: #f1f1f1;
+        --orange-highlight: #ff9a3c;
     }
+    
+    /* Dark mode variables */
+    [data-theme="dark"] {
+        --primary-color: #4d94ff;
+        --secondary-color: #0066cc;
+        --accent-color: #00cccc;
+        --text-color: #f1f1f1;
+        --light-bg: #1e1e1e;
+        --card-bg: #2d2d2d;
+        --gradient-bg: linear-gradient(135deg, #2d3436 0%, #000428 100%);
+    }
+    
+    /* Force text to be light on dark backgrounds in dark mode */
+    [data-theme="dark"] div {
+        color: var(--dark-text) !important;
+    }
+    
+    /* Specific selectors for dark text on dark background issue */
+    [data-theme="dark"] p,
+    [data-theme="dark"] h1,
+    [data-theme="dark"] h2, 
+    [data-theme="dark"] h3,
+    [data-theme="dark"] h4,
+    [data-theme="dark"] h5,
+    [data-theme="dark"] h6,
+    [data-theme="dark"] span,
+    [data-theme="dark"] li {
+        color: var(--dark-text) !important;
+    }
+    
+    /* Preserve colored highlights for important text */
+    [data-theme="dark"] .orange-text, 
+    [data-theme="dark"] .highlight-text-orange, 
+    [data-theme="dark"] strong.orange-text {
+        color: var(--orange-highlight) !important;
+        font-weight: 600;
+    }
+    
+    /* Specific fixes for areas in your screenshot */
+    [data-theme="dark"] .stText,
+    [data-theme="dark"] .stMarkdown {
+        color: var(--dark-text) !important;
+    }
+    
+    /* Target the specific "Who I Am" section */
+    [data-theme="dark"] div.main div:first-child h1,
+    [data-theme="dark"] div.main div:first-child p {
+        color: var(--dark-text) !important;
+    }
+    
     .main {
         background-image: var(--gradient-bg);
         color: var(--text-color);
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+    
     .content-container {
-        background-color: rgba(255, 255, 255, 0.85);
+        background-color: var(--card-bg);
         border-radius: 15px;
         padding: 30px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         margin-bottom: 30px;
         backdrop-filter: blur(5px);
+        color: var(--text-color);
     }
+    
     .header-container {
         padding: 40px;
         border-radius: 15px;
@@ -51,7 +108,8 @@ def local_css():
         margin-bottom: 30px;
         position: relative;
         overflow: hidden;
-    }   
+    }
+    
     .header-container:before {
         content: "";
         position: absolute;
@@ -62,18 +120,22 @@ def local_css():
         background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon fill="rgba(255,255,255,0.05)" points="0,100 100,0 100,100"/></svg>');
         background-size: cover;
     }
+    
     .header-text h1 {
         font-size: 3.5rem;
         font-weight: 700;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         margin-bottom: 10px;
-    } 
+        color: white; /* Always white for better contrast on the dark header */
+    }
+    
     .header-text h2 {
         font-size: 1.8rem;
         font-weight: 400;
         margin-bottom: 20px;
         color: #b3d9ff;
     }
+    
     .project-card {
         background-color: var(--card-bg);
         border-radius: 10px;
@@ -82,13 +144,16 @@ def local_css():
         margin-bottom: 25px;
         transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         border-left: 5px solid var(--primary-color);
-    }  
+        color: var(--text-color);
+    }
+    
     .project-card:hover {
         transform: translateY(-7px);
         box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
     }
+    
     .tech-badge {
-        background-color: #e6f2ff;
+        background-color: rgba(0, 102, 204, 0.1);
         color: var(--primary-color);
         border-radius: 20px;
         padding: 6px 12px;
@@ -99,11 +164,19 @@ def local_css():
         margin-bottom: 8px;
         border: 1px solid rgba(0, 102, 204, 0.3);
         transition: all 0.2s ease;
-    }  
+    }
+    
+    [data-theme="dark"] .tech-badge {
+        background-color: rgba(77, 148, 255, 0.2);
+        border: 1px solid rgba(77, 148, 255, 0.4);
+        color: var(--primary-color);
+    }
+    
     .tech-badge:hover {
         background-color: var(--primary-color);
         color: white;
     }
+    
     .section-title {
         font-size: 2.2rem;
         font-weight: 700;
@@ -111,7 +184,8 @@ def local_css():
         position: relative;
         padding-bottom: 0.8rem;
         color: var(--primary-color);
-    } 
+    }
+    
     .section-title:after {
         content: "";
         position: absolute;
@@ -122,24 +196,46 @@ def local_css():
         background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
         border-radius: 2px;
     }
+    
+    /* Special classes for highlighted text that should stay visible */
     .highlight-text {
         color: var(--primary-color);
         font-weight: 600;
     }
+    
+    .orange-text, 
+    [data-theme="dark"] .orange-text {
+        color: var(--orange-highlight) !important;
+        font-weight: 600;
+    }
+    
+    /* Make sure Data Scientist and other orange text stays visible */
+    strong, .strong-text {
+        color: var(--orange-highlight) !important;
+        font-weight: 600;
+    }
+    
     .css-1d391kg {
         background-color: #1e3a5f;
-    }  
+    }
+    
     .sidebar .sidebar-content {
         background-color: #1e3a5f;
         color: white;
         padding-top: 20px;
     }
+    
+    [data-theme="dark"] .sidebar .sidebar-content {
+        background-color: #152238;
+    }
+    
     .stTabs [data-baseweb="tab-list"] {
         gap: 5px;
-        background-color: #f1f3f6;
+        background-color: var(--light-bg);
         padding: 10px 10px 0 10px;
         border-radius: 10px 10px 0 0;
-    }   
+    }
+    
     .stTabs [data-baseweb="tab"] {
         height: 50px;
         white-space: pre-wrap;
@@ -150,42 +246,63 @@ def local_css():
         color: #555;
         border: 1px solid #ddd;
         border-bottom: none;
-    } 
+    }
+    
+    [data-theme="dark"] .stTabs [data-baseweb="tab"] {
+        background-color: rgba(45, 45, 45, 0.8);
+        color: #d1d1d1;
+        border: 1px solid #444;
+        border-bottom: none;
+    }
+    
     .stTabs [aria-selected="true"] {
         background-color: var(--primary-color);
         color: white;
         border: none;
     }
+    
     .skill-progress-container {
         margin-bottom: 15px;
-    }  
+    }
+    
     .skill-progress-bar {
         height: 10px;
         background-color: #e0e0e0;
         border-radius: 5px;
         overflow: hidden;
-    }  
+    }
+    
+    [data-theme="dark"] .skill-progress-bar {
+        background-color: #444;
+    }
+    
     .skill-progress-value {
         height: 100%;
         background: linear-gradient(to right, var(--primary-color), var(--accent-color));
         border-radius: 5px;
-    } 
+    }
+    
     .skill-text {
         display: flex;
         justify-content: space-between;
         margin-bottom: 5px;
+        color: var(--text-color);
     }
+    
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
     }
+    
     .animated {
         animation: fadeIn 0.8s ease-out forwards;
     }
+    
     .timeline-container {
         position: relative;
         padding-left: 30px;
     }
+    
     .timeline-container::before {
         content: "";
         position: absolute;
@@ -196,11 +313,14 @@ def local_css():
         background: var(--primary-color);
         border-radius: 3px;
     }
+    
     .timeline-item {
         position: relative;
         padding-bottom: 30px;
         padding-left: 20px;
-    } 
+        color: var(--text-color);
+    }
+    
     .timeline-item::before {
         content: "";
         position: absolute;
@@ -209,23 +329,31 @@ def local_css():
         width: 15px;
         height: 15px;
         border-radius: 50%;
-        background: white;
+        background: var(--card-bg);
         border: 3px solid var(--primary-color);
     }
+    
     .contact-form input, .contact-form textarea {
-        background-color: #f8f9fa;
+        background-color: var(--light-bg);
         border: 1px solid #ddd;
         border-radius: 5px;
         padding: 10px;
         margin-bottom: 15px;
         width: 100%;
         font-size: 16px;
-    } 
+        color: var(--text-color);
+    }
+    
+    [data-theme="dark"] .contact-form input, [data-theme="dark"] .contact-form textarea {
+        border-color: #444;
+    }
+    
     .contact-form input:focus, .contact-form textarea:focus {
         border-color: var(--primary-color);
         box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.25);
         outline: none;
-    }  
+    }
+    
     .contact-button {
         background-color: var(--primary-color);
         color: white;
@@ -235,58 +363,117 @@ def local_css():
         font-size: 16px;
         cursor: pointer;
         transition: background-color 0.3s ease;
-    } 
+    }
+    
     .contact-button:hover {
         background-color: var(--secondary-color);
     }
+    
     .stats-container {
         display: flex;
         justify-content: space-around;
         text-align: center;
         margin: 30px 0;
     }
+    
     .stat-item {
         padding: 20px;
         border-radius: 10px;
-        background-color: white;
+        background-color: var(--card-bg);
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         width: 22%;
-    }  
+        color: var(--text-color);
+    }
+    
+    [data-theme="dark"] .stat-item {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    
     .stat-number {
         font-size: 2.5rem;
         font-weight: 700;
         color: var(--primary-color);
         margin-bottom: 5px;
-    }  
+    }
+    
     .stat-label {
         font-size: 1rem;
-        color: #666;
+        color: var(--text-color);
     }
+    
+    [data-theme="dark"] .stat-label {
+        color: #d1d1d1;
+    }
+    
     ::-webkit-scrollbar {
         width: 8px;
         height: 8px;
-    }  
+    }
+    
     ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-    }   
+        background: var(--light-bg);
+    }
+    
     ::-webkit-scrollbar-thumb {
         background: #888;
         border-radius: 4px;
-    }   
+    }
+    
     ::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
+    
+    /* Dark mode detection */
+    @media (prefers-color-scheme: dark) {
+        :root:not([data-theme]) {
+            --primary-color: #4d94ff;
+            --secondary-color: #0066cc;
+            --accent-color: #00cccc;
+            --text-color: #f1f1f1;
+            --light-bg: #1e1e1e;
+            --card-bg: #2d2d2d;
+            --gradient-bg: linear-gradient(135deg, #2d3436 0%, #000428 100%);
+        }
+        body, p, h1, h2, h3, h4, h5, h6, span, div {
+            color: var(--text-color) !important;
+        }
+    }
+    
+    /* Streamlit-specific dark mode compatibility */
+    .stApp {
+        color: var(--text-color);
+    }
+    
+    .stMarkdown {
+        color: var(--text-color) !important;
+    }
+    
+    /* Special class for the Who Am I section */
+    .dark-bg-text {
+        color: var(--dark-text) !important;
+    }
+    
+    [data-theme="dark"] .dark-bg-text {
+        color: var(--dark-text) !important;
+    }
+    
+    /* Make sure orange highlighted elements stay orange */
+    [data-theme="dark"] strong,
+    [data-theme="dark"] .stronger {
+        color: var(--orange-highlight) !important;
+    }
+    
     @media (max-width: 768px) {
         .header-text h1 {
             font-size: 2.5rem;
         }
         .header-text h2 {
             font-size: 1.5rem;
-        } 
+        }
         .stat-item {
             width: 45%;
             margin-bottom: 15px;
-        }  
+        }
         .stats-container {
             flex-wrap: wrap;
         }
@@ -1108,8 +1295,6 @@ def education_section():
                 <p>2020 - 2024</p>
             </div>
             """, unsafe_allow_html=True)       
-        with col2:
-            import altair as alt
         with st.expander("🔍 View Key Coursework"):
             col1, col2 = st.columns(2)
             with col1:
@@ -1505,12 +1690,6 @@ def experience_timeline():
                 return (end.year - start.year) * 12 + end.month - start.month
         return 0
     
-    # Import necessary libraries
-    from datetime import datetime
-    import pandas as pd
-    import altair as alt
-    
-    # Calculate time at each position
     time_data = []
     for item in timeline_data:
         months = calculate_months(item['date'])
@@ -1518,8 +1697,6 @@ def experience_timeline():
             "role": f"{item['title']} at {item['company']}",
             "months": months
         })
-    
-    # Create DataFrame and display chart
     df = pd.DataFrame(time_data)
     
     chart = alt.Chart(df).mark_bar().encode(
