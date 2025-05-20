@@ -1471,16 +1471,13 @@ def contact_section():
                 st.success("Thanks for reaching out! I'll get back to you soon.")
 def experience_timeline():
     st.markdown("<div class='section-title'>Professional Journey</div>", unsafe_allow_html=True)
-    
-    # CSS for animations and styling
     st.markdown("""
     <style>
         .timeline-container {
             position: relative;
             max-width: 1200px;
             margin: 0 auto;
-        }
-        
+        }   
         .timeline-item {
             padding: 20px 30px;
             border-radius: 10px;
@@ -1488,38 +1485,37 @@ def experience_timeline():
             position: relative;
             transition: all 0.3s ease;
             border-left: 5px solid #0066cc;
-            background: linear-gradient(145deg, #ffffff, #f0f7ff);
-            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.1);
-        }
-        
+            /* Remove white background, use theme-responsive styling */
+            background: transparent;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }    
         .timeline-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 102, 204, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
             border-left: 5px solid #00aaff;
-        }
-        
+        }    
         .timeline-date {
             color: #0066cc;
             font-weight: 600;
             font-size: 14px;
             margin-bottom: 5px;
             letter-spacing: 1px;
-        }
-        
+        }    
         .timeline-title {
             font-size: 20px;
             font-weight: bold;
             margin: 0;
-            color: #333;
-        }
-        
+            /* Use inherit to respect the theme's text color */
+            color: inherit;
+        }   
         .timeline-company {
             font-size: 16px;
-            color: #555;
+            /* Darker gray that works with both themes */
+            color: inherit;
+            opacity: 0.8;
             margin-bottom: 10px;
             font-weight: 500;
-        }
-        
+        }    
         .timeline-marker {
             position: absolute;
             left: -18px;
@@ -1536,23 +1532,23 @@ def experience_timeline():
             box-shadow: 0 0 0 5px rgba(0, 102, 204, 0.2);
             z-index: 1;
             transition: all 0.3s ease;
-        }
-        
+        }    
         .timeline-line {
             position: absolute;
             left: -3px;
             top: 0;
             height: 100%;
             width: 3px;
-            background-color: #ddd;
+            background-color: #0066cc;
+            opacity: 0.3;
             z-index: 0;
-        }
-        
+        }    
         .timeline-description {
-            color: #666;
+            /* Use inherit to respect theme's text color */
+            color: inherit;
+            opacity: 0.8;
             line-height: 1.6;
-        }
-        
+        }       
         .badge {
             display: inline-block;
             padding: 5px 10px;
@@ -1561,10 +1557,9 @@ def experience_timeline():
             font-weight: 600;
             margin-right: 5px;
             margin-top: 10px;
-            background-color: rgba(0, 102, 204, 0.1);
+            background-color: rgba(0, 102, 204, 0.2);
             color: #0066cc;
-        }
-        
+        }     
         .details-btn {
             background-color: #0066cc;
             color: white;
@@ -1575,23 +1570,35 @@ def experience_timeline():
             margin-top: 10px;
             transition: all 0.3s ease;
             font-size: 14px;
-        }
-        
+        }    
         .details-btn:hover {
             background-color: #0055aa;
         }
-        
+        /* Add a border to enhance visibility in dark mode */
+        .timeline-item {
+            border: 1px solid rgba(128, 128, 128, 0.2);
+        }
+        /* Style for the expanded details section */
+        .details-section {
+            margin-left: 30px; 
+            padding: 15px; 
+            border-radius: 8px; 
+            border-left: 3px solid #0066cc; 
+            margin-bottom: 20px;
+            /* Remove fixed background color */
+            background-color: rgba(0, 102, 204, 0.05);
+            /* Ensure text is visible in both themes */
+            color: inherit;
+        }
         @keyframes fadeIn {
             from {opacity: 0; transform: translateY(20px);}
             to {opacity: 1; transform: translateY(0);}
-        }
-        
+        }    
         .animate-in {
             animation: fadeIn 0.5s ease forwards;
         }
     </style>
     """, unsafe_allow_html=True)
-    
     timeline_data = [
         {
             'date': 'March 2024 - Present',
@@ -1627,23 +1634,18 @@ def experience_timeline():
         }
     ]
     
-    # Create container with timeline line
-    st.markdown('<div class="timeline-container"><div class="timeline-line"></div>', unsafe_allow_html=True)
+    # Add the datetime import if it's not already in your file
+    from datetime import datetime
+    import pandas as pd
+    import altair as alt
     
-    # Display each timeline item with animation delay
+    st.markdown('<div class="timeline-container"><div class="timeline-line"></div>', unsafe_allow_html=True)
     for i, item in enumerate(timeline_data):
-        # Create unique keys for each item and its expandable section
         details_key = f"details_{i}"
         expand_key = f"expand_{i}"
-        
-        # Store expansion state in session state if not already there
         if expand_key not in st.session_state:
             st.session_state[expand_key] = False
-        
-        # Calculate animation delay
         delay = i * 0.2
-        
-        # Create the timeline item with animation
         st.markdown(f"""
         <div class="timeline-item animate-in" style="animation-delay: {delay}s">
             <div class="timeline-marker">{i+1}</div>
@@ -1656,26 +1658,17 @@ def experience_timeline():
             </div>
         </div>
         """, unsafe_allow_html=True)
-        
-        # Add interactive details button and collapsible content
         if st.button(f"Show Details", key=details_key):
-            st.session_state[expand_key] = not st.session_state[expand_key]
-        
+            st.session_state[expand_key] = not st.session_state[expand_key]     
         if st.session_state[expand_key]:
             st.markdown(f"""
-            <div style="margin-left: 30px; padding: 15px; background-color: #f9f9f9; 
-                        border-radius: 8px; border-left: 3px solid #0066cc; margin-bottom: 20px;">
+            <div class="details-section">
                 <p>{item['details']}</p>
             </div>
             """, unsafe_allow_html=True)
-    
-    # Close container
     st.markdown('</div>', unsafe_allow_html=True)
     
-    # Add interactive chart showing time spent at each position
     st.markdown("<h3 style='margin-top: 40px;'>Time Distribution</h3>", unsafe_allow_html=True)
-    
-    # Calculate months for each position (approximate)
     def calculate_months(date_range):
         if "Present" in date_range:
             end_date = datetime.now()
@@ -1700,8 +1693,10 @@ def experience_timeline():
             "role": f"{item['title']} at {item['company']}",
             "months": months
         })
+    
     df = pd.DataFrame(time_data)
     
+    # Configure a chart with better dark mode compatibility
     chart = alt.Chart(df).mark_bar().encode(
         x=alt.X('months:Q', title='Months'),
         y=alt.Y('role:N', title='Position', sort='-x'),
@@ -1711,6 +1706,8 @@ def experience_timeline():
         width=600,
         height=300,
         title='Experience Duration'
+    ).configure_view(
+        strokeWidth=0
     ).interactive()
     
     st.altair_chart(chart, use_container_width=True)
