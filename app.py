@@ -657,7 +657,7 @@ def header_section():
         """, unsafe_allow_html=True)
         st.markdown("""
         <div style="margin-top: 25px;">
-            <a href="https://www.linkedin.com/in/saksham-raj" target="_blank" style="text-decoration: none;">
+            <a href="https://www.linkedin.com/in/saksham-raj-07863b203/" target="_blank" style="text-decoration: none;">
                 <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" 
                      style="margin-right: 10px; transition: transform 0.3s ease;" 
                      onmouseover="this.style.transform='scale(1.1)'" 
@@ -1451,7 +1451,7 @@ def contact_section():
         <h3>Contact Information</h3>
         <p>📧 <strong>Email:</strong> sakshamraj0170@gmail.com</p>
         <p>📱 <strong>Phone:</strong> +91-7004028809</p>
-        <p>🔗 <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/saksham-raj">linkedin.com/in/saksham-raj</a></p>
+        <p>🔗 <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/saksham-raj-07863b203/">linkedin.com/in/saksham-raj</a></p>
         <p>💻 <strong>GitHub:</strong> <a href="https://github.com/sakshamraj">github.com/sakshamraj</a></p>
         <p>👨‍💻 <strong>LeetCode:</strong> <a href="https://leetcode.com/sakshamraj">leetcode.com/sakshamraj</a></p>
         </div>
