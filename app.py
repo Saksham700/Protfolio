@@ -1451,7 +1451,7 @@ def contact_section():
         <h3>Contact Information</h3>
         <p>📧 <strong>Email:</strong> sakshamraj0170@gmail.com</p>
         <p>📱 <strong>Phone:</strong> +91-7004028809</p>
-        <p>🔗 <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/saksham-raj-07863b203/">linkedin.com/in/saksham-raj</a></p>
+        <p>🔗 <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/saksham-raj-07863b203/">https://www.linkedin.com/in/saksham-raj-07863b203/</a></p>
         <p>💻 <strong>GitHub:</strong> <a href="https://github.com/Saksham700">github.com/Saksham700</a></p>
         <p>👨‍💻 <strong>LeetCode:</strong> <a href="https://leetcode.com/sakshamraj">leetcode.com/sakshamraj</a></p>
         </div>
