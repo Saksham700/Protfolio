@@ -663,7 +663,7 @@ def header_section():
                      onmouseover="this.style.transform='scale(1.1)'" 
                      onmouseout="this.style.transform='scale(1.0)'">
             </a>
-            <a href="https://github.com/sakshamraj" target="_blank" style="text-decoration: none;">
+            <a href="https://github.com/Saksham700" target="_blank" style="text-decoration: none;">
                 <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" 
                      style="margin-right: 10px; transition: transform 0.3s ease;" 
                      onmouseover="this.style.transform='scale(1.1)'" 
@@ -1452,7 +1452,7 @@ def contact_section():
         <p>📧 <strong>Email:</strong> sakshamraj0170@gmail.com</p>
         <p>📱 <strong>Phone:</strong> +91-7004028809</p>
         <p>🔗 <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/saksham-raj-07863b203/">linkedin.com/in/saksham-raj</a></p>
-        <p>💻 <strong>GitHub:</strong> <a href="https://github.com/sakshamraj">github.com/sakshamraj</a></p>
+        <p>💻 <strong>GitHub:</strong> <a href="https://github.com/Saksham700">github.com/Saksham700</a></p>
         <p>👨‍💻 <strong>LeetCode:</strong> <a href="https://leetcode.com/sakshamraj">leetcode.com/sakshamraj</a></p>
         </div>
         """, unsafe_allow_html=True)
